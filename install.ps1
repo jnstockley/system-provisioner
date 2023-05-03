@@ -41,7 +41,16 @@ function Get-Runner {
 }
 
 function Install-Runner() {
-    
+    $GITHUB_USERNAME = Read-Host "Enter GitHub Username"
+    $GITHUB_REPO = Read-Host "Enter GitHub Repo Name"
+    echo "Runner Token found here: https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO}/settings/actions/runners/new"
+    $GITHUB_RUNNER_TOKEN = Read-Host "Enter Runner Token"
+
+    Set-Location actions-runner
+
+    ./config.cmd --url https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO} --token $GITHUB_RUNNER_TOKEN
+
+    Start-Service "actions.runner.*"
 }
 
 Get-Runner
