@@ -53,7 +53,7 @@ function get_runner(){
     tar xzf $OUTPUTFILE  
 }
 
-function install_run(){
+function install_runner(){
     # Get the GitHub information to setup the runner
     read -p "Enter GitHub Username: " GITHUB_USERNAME
     read -p "Enter GitHub Repo Name: " GITHUB_REPO
