@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function url_builder() {
+function get_url() {
     VERSION="2.304.0"
     OS=$(uname)
     arch=$(uname -m)
@@ -36,11 +36,11 @@ function url_builder() {
     echo "https://github.com/actions/runner/releases/download/v${VERSION}/actions-runner-${OS}-${arch}-${VERSION}.tar.gz" "actions-runner-${OS}-${arch}-${VERSION}.tar.gz"
 }
 
-function install_runner(){
+function get_runner(){
     # Delete old directory if present
     rm -rf actions-runner
 
-    read URL OUTPUTFILE < <(url_builder)
+    read URL OUTPUTFILE < <(get_url)
 
     # Create a folder
     mkdir actions-runner && cd actions-runner
@@ -52,7 +52,7 @@ function install_runner(){
     tar xzf $OUTPUTFILE  
 }
 
-function configure_runner(){
+function install_run(){
     read -p "Enter GitHub Username: " GITHUB_USERNAME
     read -p "Enter GitHub Repo Name: " GITHUB_REPO
     echo "Runner Token found here: https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO}/settings/actions/runners/new"
@@ -73,6 +73,6 @@ function configure_runner(){
 
 }
 
-install_runner
+get_runner
 
-configure_runner
+install_runner
