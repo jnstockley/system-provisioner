@@ -12,7 +12,7 @@ function get_url() {
         OS="osx"
     elif [ $OS = "Linux" ] 
     then
-        echo "linux"
+        OS="linux"
     else
         OS=""
         echo "Unsupported OS"
