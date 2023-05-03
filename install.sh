@@ -52,4 +52,27 @@ function install_runner(){
     tar xzf $OUTPUTFILE  
 }
 
+function configure_runner(){
+    read -p "Enter GitHub Username: " GITHUB_USERNAME
+    read -p "Enter GitHub Repo Name: " GITHUB_REPO
+    echo "Runner Token found here: https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO}/settings/actions/runners/new"
+    read -p "Enter Runner Token: " GITHUB_RUNNER_TOKEN
+    
+    # Set config to executable
+    chmod +x config.sh
+    ./config.sh --url "https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO}" --token $GITHUB_RUNNER_TOKEN
+
+    # Set svc to executable
+    chmod +x svc.sh
+
+    # Install as service
+    sudo ./svc.sh install
+
+    # Start svc service
+    sudo ./svc.sh start
+
+}
+
 install_runner
+
+configure_runner
