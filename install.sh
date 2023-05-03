@@ -1,6 +1,7 @@
 #!/bin/bash
 
 function get_url() {
+    # Get OS type and architecture and return the download URL
     VERSION="2.304.0"
     OS=$(uname)
     arch=$(uname -m)
@@ -53,6 +54,7 @@ function get_runner(){
 }
 
 function install_run(){
+    # Get the GitHub information to setup the runner
     read -p "Enter GitHub Username: " GITHUB_USERNAME
     read -p "Enter GitHub Repo Name: " GITHUB_REPO
     echo "Runner Token found here: https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO}/settings/actions/runners/new"
@@ -60,6 +62,8 @@ function install_run(){
     
     # Set config to executable
     chmod +x config.sh
+
+    # Configure the runner
     ./config.sh --url "https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO}" --token $GITHUB_RUNNER_TOKEN
 
     # Set svc to executable

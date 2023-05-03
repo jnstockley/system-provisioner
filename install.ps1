@@ -1,6 +1,6 @@
 function Get-URL() {
+    # Get OS type and architecture and return the download URL
     $VERSION = "2.304.0"
-
     $os_type = (Get-WmiObject -Class Win32_ComputerSystem).SystemType
 
     if ($os_type -match "arm64") {
@@ -28,8 +28,7 @@ function Get-Runner {
 
     $OUTPUTFILE = $tmp[1]
 
-    # Create a folder under the drive root
-    
+    # Create a folder
     New-Item actions-runner -ItemType Directory | Out-Null
 
     # Download the latest runner package
@@ -41,15 +40,19 @@ function Get-Runner {
 }
 
 function Install-Runner() {
+    # Get the GitHub information to setup the runner
     $GITHUB_USERNAME = Read-Host "Enter GitHub Username"
     $GITHUB_REPO = Read-Host "Enter GitHub Repo Name"
     echo "Runner Token found here: https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO}/settings/actions/runners/new"
     $GITHUB_RUNNER_TOKEN = Read-Host "Enter Runner Token"
 
+    # Change directory to actions-runner
     Set-Location actions-runner
 
+    # Configure the runner
     ./config.cmd --url https://github.com/${GITHUB_USERNAME}/${GITHUB_REPO} --token $GITHUB_RUNNER_TOKEN
 
+    # Start svc service
     Start-Service "actions.runner.*"
 }
 
