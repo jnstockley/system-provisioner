@@ -5,3 +5,7 @@ jobs:
   temp_job:
       name: Test
       runs-on: "self-hosted"
+  
+      steps:
+        - name: Test
+          run: cat "Hello World"
