@@ -1,3 +1,4 @@
+name: Full Update - Linux
 on:
   workflow_dispatch:
 
