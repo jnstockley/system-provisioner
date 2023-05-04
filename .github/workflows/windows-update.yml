@@ -1,4 +1,4 @@
-name: Full Update - Linux
+name: Full Update - Windows
 on:
   workflow_dispatch:
 
