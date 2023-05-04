@@ -1,0 +1,12 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  update:
+      name: Full Update - macOS
+      runs-on: "self-hosted"
+  
+      steps:
+        - name: Update Brew Packages
+          run: brew upgrade
+        

@@ -1,0 +1,26 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  update:
+      name: Full Update - Linux
+      runs-on: "self-hosted"
+  
+      steps:
+        - name: Update APT Packages
+          run: |
+            sudo apt update
+            sudo apt upgrade -y
+        - name: Update Pacman Packages
+          run: sudo pacman -Syu
+        - name: Update YAY Packages
+          run: sudo yay
+        - name: Update dnf Packages
+          run: sudo dnf update
+        - name: Update Sanp Pacakges
+          run: sudo snap refresh
+        - name: Update Flatpak Pacakges
+          run: flatpak update
+        - name: Update Brew Packages
+          run: brew upgrade
+        

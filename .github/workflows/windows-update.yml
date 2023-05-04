@@ -1,0 +1,14 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  update:
+      name: Full Update - Windows
+      runs-on: "self-hosted"
+  
+      steps:
+        - name: Update WinGet Pacakges
+          run: winget upgrade --all
+        - name: Update Choco Packages
+          run: choco upgrade all
+        
